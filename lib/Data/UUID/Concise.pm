@@ -1,6 +1,4 @@
-use warnings;
-use strict;
-use strictures;
+use strictures 1;
 
 package Data::UUID::Concise;
 
@@ -14,11 +12,10 @@ use MooX::Types::MooseLike::Base qw(:all);
 
 use Carp;
 use Data::UUID;
+use List::MoreUtils qw[ uniq ];
 use Math::BigInt;
 
-use feature qw[ say ];
-
-our $VERSION = '0.121082';    # VERSION
+our $VERSION = '0.121240';    # VERSION
 
 # ABSTRACT: Encode UUIDs to be more concise or communicable
 # ENCODING: utf-8
@@ -30,6 +27,25 @@ has 'alphabet' => (
         '23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
     },
 );
+
+around 'alphabet' => sub {
+    my ( $next, $self, @rest ) = @_;
+    return $self->$next unless @rest;
+
+    my ( $alphabet_candidate ) = @rest;
+    return $self->$next( _normalize_alphabet( $alphabet_candidate ) );
+};
+
+sub _normalize_alphabet
+{
+    my ( $alphabet_candidate ) = @_;
+
+    my @symbols = split //, $alphabet_candidate;
+    my @decruftified_symbols = uniq sort { $a cmp $b } @symbols;
+    my $decruftified_alphabet = join '', @decruftified_symbols;
+
+    return $decruftified_alphabet;
+}
 
 sub encode
 {
@@ -83,7 +99,7 @@ Data::UUID::Concise - Encode UUIDs to be more concise or communicable
 
 =head1 VERSION
 
-version 0.121082
+version 0.121240
 
 =head1 SYNOPSIS
 
@@ -93,24 +109,38 @@ version 0.121082
     my $encoded_uuid = $duc->encode((Data::UUID->new)->create);
     my $decoded_uuid = $duc->decode('M55djt9tt4WoFaL68da9Ef');
 
+    $duc->alphabet('aaaaabcdefgh1230123');
+    $duc->alphabet; # 0123abcdefgh
+
 =head1 ATTRIBUTES
 
 =head2 alphabet
 
-This is the collection of symbols that are used for the encoding scheme. By
-default, a reasonably unambiguous set of characters is used that is reminiscent
-of the base 58 scheme used by a rather prominent photo site's URL shortener.
+This is the collection of symbols that are used for the encoding
+scheme.
+
+By default, a reasonably unambiguous set of characters is used that is
+reminiscent of the base 58 scheme used by a rather prominent photo
+site's URL shortener.
 
 =head1 METHODS
 
 =head2 encode
 
-Encode a Data::UUID instance as a string with the appropriate set of symbols.
+Encode a Data::UUID instance as a string with the appropriate set of
+symbols.
 
 =head2 decode
 
-Decode a string with the appropriate set of symbols and return a Data::UUID
-instance representing the decoded UUID.
+Decode a string with the appropriate set of symbols and return a
+Data::UUID instance representing the decoded UUID.
+
+=head1 FUNCTIONS
+
+=head2 _normalize_alphabet
+
+Private method. Normalize the alphabet such that it is sorted and that
+all elements are distinct.
 
 =head1 SUPPORT
 

@@ -15,7 +15,9 @@ my %WriteMakefileArgs = (
     "File::Find" => 0,
     "File::Temp" => 0,
     "Test::Exception" => 0,
-    "Test::More" => 0
+    "Test::More" => 0,
+    "strict" => 0,
+    "warnings" => 0
   },
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.30"
@@ -27,18 +29,16 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "Carp" => 0,
     "Data::UUID" => 0,
+    "List::MoreUtils" => 0,
     "Math::BigInt" => 0,
     "Moo" => 0,
     "MooX::Types::MooseLike::Base" => 0,
     "charnames" => 0,
-    "feature" => 0,
     "open" => 0,
-    "strict" => 0,
-    "strictures" => 0,
-    "utf8" => 0,
-    "warnings" => 0
+    "strictures" => 1,
+    "utf8" => 0
   },
-  "VERSION" => "0.121082",
+  "VERSION" => "0.121240",
   "test" => {
     "TESTS" => "t/*.t"
   }

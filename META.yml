@@ -7,6 +7,8 @@ build_requires:
   File::Temp: 0
   Test::Exception: 0
   Test::More: 0
+  strict: 0
+  warnings: 0
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
@@ -22,28 +24,24 @@ no_index:
     - xt
     - examples
     - corpus
-  package:
-    - DB
 provides:
   Data::UUID::Concise:
     file: lib/Data/UUID/Concise.pm
-    version: 0.121082
+    version: 0.121240
 requires:
   Carp: 0
   Data::UUID: 0
+  List::MoreUtils: 0
   Math::BigInt: 0
   Moo: 0
   MooX::Types::MooseLike::Base: 0
   charnames: 0
-  feature: 0
   open: 0
   perl: 5.010
-  strict: 0
-  strictures: 0
+  strictures: 1
   utf8: 0
-  warnings: 0
 resources:
   bugtracker: https://github.com/nrr/Data-UUID-Concise/issues
   homepage: https://github.com/nrr/Data-UUID-Concise
   repository: https://github.com/nrr/Data-UUID-Concise.git
-version: 0.121082
+version: 0.121240

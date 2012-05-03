@@ -19,9 +19,6 @@
          "xt",
          "examples",
          "corpus"
-      ],
-      "package" : [
-         "DB"
       ]
    },
    "prereqs" : {
@@ -34,17 +31,15 @@
          "requires" : {
             "Carp" : "0",
             "Data::UUID" : "0",
+            "List::MoreUtils" : "0",
             "Math::BigInt" : "0",
             "Moo" : "0",
             "MooX::Types::MooseLike::Base" : "0",
             "charnames" : "0",
-            "feature" : "0",
             "open" : "0",
             "perl" : "5.010",
-            "strict" : "0",
-            "strictures" : "0",
-            "utf8" : "0",
-            "warnings" : "0"
+            "strictures" : "1",
+            "utf8" : "0"
          }
       },
       "test" : {
@@ -52,14 +47,16 @@
             "File::Find" : "0",
             "File::Temp" : "0",
             "Test::Exception" : "0",
-            "Test::More" : "0"
+            "Test::More" : "0",
+            "strict" : "0",
+            "warnings" : "0"
          }
       }
    },
    "provides" : {
       "Data::UUID::Concise" : {
          "file" : "lib/Data/UUID/Concise.pm",
-         "version" : "0.121082"
+         "version" : "0.121240"
       }
    },
    "release_status" : "stable",
@@ -75,6 +72,6 @@
          "web" : "https://github.com/nrr/Data-UUID-Concise"
       }
    },
-   "version" : "0.121082"
+   "version" : "0.121240"
 }
 
